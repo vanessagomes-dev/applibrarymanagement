@@ -1,3 +1,6 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable no-unused-vars */
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -6,25 +9,25 @@ import { Book } from './book.entity';
 @Injectable()
 export class BooksService {
   constructor(
-    @InjectRepository(Author)
-    private readonly bookRepository: Repository<Books>,
+    @InjectRepository(Book)
+    private readonly bookRepository: Repository<Book>,
   ) {}
 
+  create(book: Partial<Book>) {
+    const newBook = this.bookRepository.create(book);
+    return this.bookRepository.save(newBook);
+  }
+
   findAll() {
-    return this.bookRepository.find({ relations: ['books'] });
+    return this.bookRepository.find({ relations: ['author'] });
   }
 
   findOne(id: number) {
-    return this.bookRepository.findOne({ where: { id }, relations: ['books'] });
+    return this.bookRepository.findOne({ where: { id }, relations: ['author'] });
   }
 
-  create(book: Partial<Book>) {
-    const newAuthor = this.bookRepository.create(book);
-    return this.bookRepository.save(newAuthor);
-  }
-
-  update(id: number, book: Partial<Book>) {
-    return this.bookRepository.update(id, book);
+  update(id: number, updateData: Partial<Book>) {
+    return this.bookRepository.update(id, updateData);
   }
 
   remove(id: number) {

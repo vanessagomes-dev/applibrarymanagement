@@ -11,6 +11,8 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const authors_module_1 = require("./authors/authors.module");
 const books_module_1 = require("./books/books.module");
+const author_entity_1 = require("./authors/author.entity");
+const book_entity_1 = require("./books/book.entity");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -20,12 +22,14 @@ exports.AppModule = AppModule = __decorate([
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'sqlite',
                 database: 'library.sqlite',
-                entities: [__dirname + '/**/*.entity{.ts,.js}'],
+                entities: [author_entity_1.Author, book_entity_1.Book],
                 synchronize: true,
             }),
             authors_module_1.AuthorsModule,
             books_module_1.BooksModule,
         ],
+        controllers: [],
+        providers: [],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map

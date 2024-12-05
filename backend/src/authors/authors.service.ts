@@ -1,3 +1,6 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable no-unused-vars */
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -10,6 +13,11 @@ export class AuthorsService {
     private readonly authorRepository: Repository<Author>,
   ) {}
 
+  create(author: Partial<Author>) {
+    const newAuthor = this.authorRepository.create(author);
+    return this.authorRepository.save(newAuthor);
+  }
+
   findAll() {
     return this.authorRepository.find({ relations: ['books'] });
   }
@@ -18,13 +26,8 @@ export class AuthorsService {
     return this.authorRepository.findOne({ where: { id }, relations: ['books'] });
   }
 
-  create(author: Partial<Author>) {
-    const newAuthor = this.authorRepository.create(author);
-    return this.authorRepository.save(newAuthor);
-  }
-
-  update(id: number, author: Partial<Author>) {
-    return this.authorRepository.update(id, author);
+  update(id: number, updateData: Partial<Author>) {
+    return this.authorRepository.update(id, updateData);
   }
 
   remove(id: number) {
