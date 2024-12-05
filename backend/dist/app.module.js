@@ -13,12 +13,13 @@ const authors_module_1 = require("./authors/authors.module");
 const books_module_1 = require("./books/books.module");
 const author_entity_1 = require("./authors/author.entity");
 const book_entity_1 = require("./books/book.entity");
+const http_1 = require("@angular/common/http");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [
+        imports: [[BrowserModule, AppRoutingModule, http_1.HttpClientModule],
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'sqlite',
                 database: 'library.sqlite',
@@ -28,8 +29,10 @@ exports.AppModule = AppModule = __decorate([
             authors_module_1.AuthorsModule,
             books_module_1.BooksModule,
         ],
+        declarations: [AppComponent],
         controllers: [],
         providers: [],
+        bootstrap: [AppComponent],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map
