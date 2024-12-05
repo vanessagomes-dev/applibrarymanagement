@@ -11,9 +11,13 @@ export class AuthorService {
 
   constructor(private http: HttpClient) { }
 
-  getAuthors(): Observable<any> {
-    return this.http.get(this.apiUrl);
-  }
+ // Método para buscar todos os autores
+ getAuthors(): Observable<any[]> {
+  return this.http.get<any[]>(this.apiUrl);
+}
 
- 
+// Método para criar um novo autor
+addAuthor(author: any): Observable<any> {
+  return this.http.post<any>(this.apiUrl, author);
+}
 }
